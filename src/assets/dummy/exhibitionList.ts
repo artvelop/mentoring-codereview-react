@@ -1,4 +1,4 @@
-export const ExhibitionList = [
+export const dummyExhibitionList = [
   {
     id: 1,
     title: '도톤보리 : teleport in osaka',
