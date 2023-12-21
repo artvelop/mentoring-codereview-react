@@ -1,4 +1,3 @@
-export const sleep = ({ ms }: { ms: number }) => {
-  const wakeUpTime = Date.now() + ms;
-  while (Date.now() < wakeUpTime) {}
+export const sleep = async ({ ms }: { ms: number }) => {
+  return new Promise((resolve) => setTimeout(() => resolve('success'), ms));
 };
