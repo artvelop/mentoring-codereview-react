@@ -6,8 +6,8 @@ export const dummyExhibitionList = [
     place: '국립 현대 미술관',
     price: 13500,
     date: {
-      start: '2023.08.17',
-      end: '2024.02.12',
+      started: '2023.08.17',
+      ended: '2024.02.12',
     },
   },
   {
@@ -17,8 +17,8 @@ export const dummyExhibitionList = [
     place: '페이스 갤러리/서울',
     price: 8500,
     date: {
-      start: '2024.01.03',
-      end: '2024.04.17',
+      started: '2024.01.03',
+      ended: '2024.04.17',
     },
   },
   {
@@ -28,8 +28,8 @@ export const dummyExhibitionList = [
     place: '하우스 서울/서울',
     price: 8500,
     date: {
-      start: '2024.01.09',
-      end: '2025.01.03',
+      started: '2024.01.09',
+      ended: '2025.01.03',
     },
   },
   {
@@ -39,8 +39,8 @@ export const dummyExhibitionList = [
     place: '하우스 서울/서울',
     price: 5000,
     date: {
-      start: '2024.01.09',
-      end: '2024.08.15',
+      started: '2024.01.09',
+      ended: '2024.08.15',
     },
   },
   {
@@ -50,8 +50,8 @@ export const dummyExhibitionList = [
     place: '라이즈아트/서울',
     price: 6500,
     date: {
-      start: '2024.02.09',
-      end: '2024.07.11',
+      started: '2024.02.09',
+      ended: '2024.07.11',
     },
   },
   {
@@ -61,8 +61,8 @@ export const dummyExhibitionList = [
     place: '스페이스K/서울',
     price: 7500,
     date: {
-      start: '2024.01.09',
-      end: '2024.06.05',
+      started: '2024.01.09',
+      ended: '2024.06.05',
     },
   },
   {
@@ -72,8 +72,8 @@ export const dummyExhibitionList = [
     place: '잠실 롯데타워',
     price: 12500,
     date: {
-      start: '2023.08.11',
-      end: '2024.02.01',
+      started: '2023.08.11',
+      ended: '2024.02.01',
     },
   },
   {
@@ -83,8 +83,8 @@ export const dummyExhibitionList = [
     place: '하우스 성수',
     price: 4500,
     date: {
-      start: '2023.07.11',
-      end: '2024.03.15',
+      started: '2023.07.11',
+      ended: '2024.03.15',
     },
   },
 ];
