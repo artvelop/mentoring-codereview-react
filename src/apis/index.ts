@@ -1,8 +1,9 @@
 import { dummyExhibitionList } from '@assets/dummy/exhibitionList';
+import { Exhibition } from '@src/lib/types/exhibition';
 import { sleep } from '@utils/sleep';
 
 // 전시회 리스트 불러오기 API
-export const getApiExhibitionList = async () => {
+export const getApiExhibitionList = async (): Promise<Exhibition[]> => {
   const response = [...dummyExhibitionList];
 
   await sleep({ ms: 1000 });
