@@ -1,6 +1,7 @@
 import { type Exhibition } from '@src/lib/types/exhibition';
 import React from 'react';
-
+import { ReactComponent as FilledStarIcon } from '@assets/FilledStar.svg';
+import { ReactComponent as EmptyStarIcon } from '@assets/EmptyStar.svg';
 interface ExhibitionCardProps {
   exhibition: Exhibition;
 }
@@ -31,7 +32,9 @@ const ExhibitionCard = ({
       </section>
 
       <section className="ml-auto min-w-10 flex flex-col justify-between">
-        <button>⭐️</button>
+        <button className="flex justify-end">
+          <FilledStarIcon />
+        </button>
         <button className="bg-black rounded-sm text-white text-[8px] px-1 py-[1px] ">
           예매하기
         </button>
