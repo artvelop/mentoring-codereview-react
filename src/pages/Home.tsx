@@ -5,17 +5,26 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { dummyExhibitionList } from '../assets/dummy/exhibitionList';
 import { FillStarIcon, TicketIcon } from '@src/Icons/Icons';
+import useGetExhibitionListData from '@hooks/Queries/get-ExhibitionList';
+import LoadingPage from '@components/Spinner/Spinner';
 
 export const Home = () => {
   const navigate = useNavigate();
-
+  const { data, isLoading } = useGetExhibitionListData();
+  console.log(data);
   return (
     <div>
       <S.Wrapper>
         <>
-          {dummyExhibitionList.map((list, key) => (
-            <ItemBox />
-          ))}
+          {!isLoading ? (
+            <>
+              {data!.map((list, key) => (
+                <ItemBox key={list.id} data={list} />
+              ))}
+            </>
+          ) : (
+            <LoadingPage />
+          )}
         </>
         <S.Footer>
           <S.FooterDiv>
