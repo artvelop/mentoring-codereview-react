@@ -13,7 +13,9 @@ export const Home = () => {
     <div>
       {isLoading && <div>Loading...</div>}
       {exhibitionList &&
-        exhibitionList.map((exhibition) => <ExhibitionCard exhibition={exhibition} />)}
+        exhibitionList.map((exhibition) => (
+          <ExhibitionCard key={exhibition.id} exhibition={exhibition} />
+        ))}
     </div>
   );
 };
