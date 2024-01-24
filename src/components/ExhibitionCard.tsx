@@ -1,7 +1,7 @@
 import { type Exhibition } from '@src/lib/types/exhibition';
 import React from 'react';
-import { ReactComponent as FilledStarIcon } from '@assets/FilledStar.svg';
-import { ReactComponent as EmptyStarIcon } from '@assets/EmptyStar.svg';
+import { ReactComponent as FilledStarIcon } from '@assets/icons/FilledStar.svg';
+import { ReactComponent as EmptyStarIcon } from '@assets/icons/EmptyStar.svg';
 import { usePickedExhibitionStore } from '@src/store';
 interface ExhibitionCardProps {
   exhibition: Exhibition;
