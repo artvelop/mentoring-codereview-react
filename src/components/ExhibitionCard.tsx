@@ -3,6 +3,7 @@ import { ReactComponent as FilledStarIcon } from '@assets/icons/FilledStar.svg';
 import { ReactComponent as EmptyStarIcon } from '@assets/icons/EmptyStar.svg';
 import { usePickedExhibitionStore } from '@src/store';
 import { type Exhibition } from '@src/lib/types/exhibition';
+import { Link } from 'react-router-dom';
 interface ExhibitionCardProps {
   exhibition: Exhibition;
 }
@@ -48,9 +49,12 @@ const ExhibitionCard = ({
         <button className="flex justify-end" onClick={togglePickCard}>
           {isPickedCard ? <FilledStarIcon /> : <EmptyStarIcon />}
         </button>
-        <button className="bg-black rounded-sm text-white text-[8px] px-1 py-[1px] ">
+        <Link
+          to={`/book/${id}`}
+          className="bg-black rounded-sm text-center text-white text-[8px] px-1 py-[1px] "
+        >
           예매하기
-        </button>
+        </Link>
       </section>
     </div>
   );
