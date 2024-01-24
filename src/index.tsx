@@ -5,6 +5,7 @@ import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './Styles/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -20,8 +21,10 @@ const queryClient = new QueryClient({
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Router />
-      <GlobalStyles />
+      <RecoilRoot>
+        <Router />
+        <GlobalStyles />
+      </RecoilRoot>
     </QueryClientProvider>
   </React.StrictMode>,
 );
