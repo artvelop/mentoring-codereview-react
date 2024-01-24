@@ -4,26 +4,20 @@ import { FillStarIcon, NotFillStarIcon } from '@src/Icons/Icons';
 import { FlexAlignCSS, FlexColumnCSS } from '@src/Styles/common';
 import StarService from '@utils/StarService';
 import { IsLikeStar } from '@utils/isLikeStar';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-function ItemBox({ data }: { data: ExhibitionType }) {
-  const [likeStarId, setLikeStarId] = useState<undefined | string>(undefined);
-
+function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList: ([]) => void }) {
   const onClickNotFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
     event.stopPropagation();
     StarService.setStar(String(id));
-    setLikeStarId(StarService.getStar());
+    setLikeList(StarService.getStar());
   };
   const onClicFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
     event.stopPropagation();
     StarService.removeStar(String(id));
-    setLikeStarId(StarService.getStar());
+    setLikeList(StarService.getStar());
   };
-
-  useEffect(() => {
-    setLikeStarId(IsLikeStar(String(data.id)));
-  }, []);
 
   return (
     <S.Wrapper>
@@ -36,7 +30,7 @@ function ItemBox({ data }: { data: ExhibitionType }) {
             <S.Price>{data.price}원</S.Price>
           </div>
           <div>
-            <S.Date>{data.date.started}</S.Date>
+            <Button size={'small'}>예매하기</Button>
           </div>
         </S.MainLeft>
         <S.MainRight>
@@ -47,13 +41,13 @@ function ItemBox({ data }: { data: ExhibitionType }) {
               <NotFillStarIcon onClick={(e) => onClickNotFillStart(e, data.id)} />
             )}
           </div>
-          <Button size={'small'}>예매하기</Button>
+          <S.Date>{data.date.started}</S.Date>
         </S.MainRight>
       </S.Main>
     </S.Wrapper>
   );
 }
-export default ItemBox;
+export default LikeItemBox;
 
 const Wrapper = styled.div`
   cursor: pointer;
