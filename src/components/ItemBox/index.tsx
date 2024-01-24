@@ -2,20 +2,35 @@ import Button from '@components/Button/Button';
 import { ExhibitionType } from '@hooks/Queries/get-ExhibitionList';
 import { FillStarIcon, NotFillStarIcon } from '@src/Icons/Icons';
 import { FlexAlignCSS, FlexColumnCSS } from '@src/Styles/common';
-import { useState } from 'react';
+import StarService from '@utils/StarService';
+import { MouseEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function ItemBox({ data }: { data: ExhibitionType }) {
-  const [fillStar, setFillStar] = useState(false);
+  const [likeStarId, setLikeStarId] = useState<undefined | string>(undefined);
 
-  const onClickNotFillStart = (event: any) => {
+  const onClickNotFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
     event.stopPropagation();
-    setFillStar(true);
+    StarService.setStar(String(id));
+    setLikeStarId(StarService.getStar());
   };
-  const onClicFillStart = (event: any) => {
+  const onClicFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
     event.stopPropagation();
-    setFillStar(false);
+    StarService.removeStar(String(id));
+    setLikeStarId(StarService.getStar());
   };
+
+  const isLikeStar = () => {
+    let localListString = StarService.getStar();
+    let localList: string[] = localListString ? localListString : [];
+
+    return localList.find((starid: string) => starid == String(data.id));
+  };
+
+  useEffect(() => {
+    setLikeStarId(isLikeStar());
+  }, []);
+
   return (
     <S.Wrapper>
       <Img src={data.imageUrl} alt="Img" />
@@ -32,10 +47,10 @@ function ItemBox({ data }: { data: ExhibitionType }) {
         </S.MainLeft>
         <S.MainRight>
           <div>
-            {fillStar ? (
-              <FillStarIcon onClick={onClicFillStart} />
+            {isLikeStar() ? (
+              <FillStarIcon onClick={(e) => onClicFillStart(e, data.id)} />
             ) : (
-              <NotFillStarIcon onClick={onClickNotFillStart} />
+              <NotFillStarIcon onClick={(e) => onClickNotFillStart(e, data.id)} />
             )}
           </div>
           <Button size={'small'}>예매하기</Button>

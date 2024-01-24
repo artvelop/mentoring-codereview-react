@@ -1,9 +1,8 @@
 import ItemBox from '@components/ItemBox';
 import { FlexCenterCSS, WidthAutoCSS } from '@src/Styles/common';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { dummyExhibitionList } from '../assets/dummy/exhibitionList';
 import { FillStarIcon, TicketIcon } from '@src/Icons/Icons';
 import useGetExhibitionListData from '@hooks/Queries/get-ExhibitionList';
 import LoadingPage from '@components/Spinner/Spinner';
@@ -11,7 +10,9 @@ import LoadingPage from '@components/Spinner/Spinner';
 export const Home = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetExhibitionListData();
+
   console.log(data);
+
   return (
     <div>
       <S.Wrapper>
