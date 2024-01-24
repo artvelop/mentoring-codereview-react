@@ -4,12 +4,25 @@ import './index.css';
 import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './Styles/global';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      useErrorBoundary: true,
+    },
+  },
+});
+
 root.render(
   <React.StrictMode>
-    <Router />
-    <GlobalStyles />
+    <QueryClientProvider client={queryClient}>
+      <Router />
+      <GlobalStyles />
+    </QueryClientProvider>
   </React.StrictMode>,
 );
 
