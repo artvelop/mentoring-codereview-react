@@ -1,17 +1,22 @@
 import ItemBox from '@components/ItemBox';
 import { FlexCenterCSS, WidthAutoCSS } from '@src/Styles/common';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
-import { FillStarIcon, TicketIcon } from '@src/Icons/Icons';
 import useGetExhibitionListData from '@hooks/Queries/get-ExhibitionList';
 import LoadingPage from '@components/Spinner/Spinner';
+import { useLocation } from 'react-router-dom';
+import LikeItemBox from '@components/ItemBox/likeItemBox';
+import StarService from '@utils/StarService';
 
 export const Home = () => {
-  const navigate = useNavigate();
   const { data, isLoading } = useGetExhibitionListData();
+  const [likeList, setLikeList] = useState(StarService.getStar() || []);
+  const location = useLocation();
+  console.log(location.pathname);
 
-  console.log(data);
+  //data를 filter로 처리
+  //그걸 itembox에 줄수있다.
 
   return (
     <div>
@@ -19,24 +24,31 @@ export const Home = () => {
         <>
           {!isLoading ? (
             <>
-              {data!.map((list, key) => (
-                <ItemBox key={list.id} data={list} />
-              ))}
+              {location.pathname === '/' ? (
+                <>
+                  {data!.map((list, key) => (
+                    <ItemBox key={list.id} data={list} />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {data!.map((list, idx: number) => (
+                    <>
+                      {likeList.map(
+                        (likeId: string, idx: number) =>
+                          Number(likeId) === list.id && (
+                            <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
+                          ),
+                      )}
+                    </>
+                  ))}
+                </>
+              )}
             </>
           ) : (
             <LoadingPage />
           )}
         </>
-        <S.Footer>
-          <S.FooterDiv>
-            <div>전시회</div>
-            <TicketIcon />
-          </S.FooterDiv>
-          <S.FooterDiv>
-            <div>찜목록</div>
-            <FillStarIcon />
-          </S.FooterDiv>
-        </S.Footer>
       </S.Wrapper>
     </div>
   );
