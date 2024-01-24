@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './Styles/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+const RouterObject = createBrowserRouter(Router);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -22,7 +25,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Router />
+        <RouterProvider router={RouterObject} />
         <GlobalStyles />
       </RecoilRoot>
     </QueryClientProvider>
