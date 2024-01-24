@@ -1,10 +1,11 @@
 import Button from '@components/Button/Button';
+import { ExhibitionType } from '@hooks/Queries/get-ExhibitionList';
 import { FillStarIcon, NotFillStarIcon } from '@src/Icons/Icons';
 import { FlexAlignCSS, FlexColumnCSS } from '@src/Styles/common';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-function ItemBox() {
+function ItemBox({ data }: { data: ExhibitionType }) {
   const [fillStar, setFillStar] = useState(false);
 
   const onClickNotFillStart = (event: any) => {
@@ -17,19 +18,16 @@ function ItemBox() {
   };
   return (
     <S.Wrapper>
-      <Img
-        src="https://artvelop.s3.ap-northeast-2.amazonaws.com/code-review/light/1.jpeg"
-        alt="Img"
-      />
+      <Img src={data.imageUrl} alt="Img" />
       <S.Main>
         <S.MainLeft>
           <div>
-            <S.Title>전시회 제목</S.Title>
-            <S.Dec>그라운드 시소 센트럴</S.Dec>
-            <S.Price>5,000원</S.Price>
+            <S.Title>{data.title}</S.Title>
+            <S.Dec>{data.place}</S.Dec>
+            <S.Price>{data.price}원</S.Price>
           </div>
           <div>
-            <S.Date>2024.05.05</S.Date>
+            <S.Date>{data.date.started}</S.Date>
           </div>
         </S.MainLeft>
         <S.MainRight>
