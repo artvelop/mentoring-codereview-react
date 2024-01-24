@@ -1,8 +1,8 @@
-import { type Exhibition } from '@src/lib/types/exhibition';
 import React from 'react';
 import { ReactComponent as FilledStarIcon } from '@assets/icons/FilledStar.svg';
 import { ReactComponent as EmptyStarIcon } from '@assets/icons/EmptyStar.svg';
 import { usePickedExhibitionStore } from '@src/store';
+import { type Exhibition } from '@src/lib/types/exhibition';
 interface ExhibitionCardProps {
   exhibition: Exhibition;
 }
@@ -17,9 +17,15 @@ const ExhibitionCard = ({
     date: { started, ended },
   },
 }: ExhibitionCardProps) => {
-  const { addExhibition } = usePickedExhibitionStore();
+  const { addExhibition, deleteExhibition, pickedExhibitionIDs } = usePickedExhibitionStore();
 
-  const handlePickCard = () => {
+  const isPickedCard = pickedExhibitionIDs.includes(id);
+
+  const togglePickCard = () => {
+    if (isPickedCard) {
+      deleteExhibition(id);
+      return;
+    }
     addExhibition(id);
   };
 
@@ -39,8 +45,8 @@ const ExhibitionCard = ({
       </section>
 
       <section className="ml-auto min-w-10 flex flex-col justify-between">
-        <button className="flex justify-end" onClick={handlePickCard}>
-          <FilledStarIcon />
+        <button className="flex justify-end" onClick={togglePickCard}>
+          {isPickedCard ? <FilledStarIcon /> : <EmptyStarIcon />}
         </button>
         <button className="bg-black rounded-sm text-white text-[8px] px-1 py-[1px] ">
           예매하기
