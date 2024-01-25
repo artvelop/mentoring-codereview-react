@@ -5,9 +5,11 @@ import { FlexAlignCSS, FlexColumnCSS } from '@src/Styles/common';
 import StarService from '@utils/StarService';
 import { IsLikeStar } from '@utils/isLikeStar';
 import { MouseEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList: ([]) => void }) {
+  const navigator = useNavigate();
   const onClickNotFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
     event.stopPropagation();
     StarService.setStar(String(id));
@@ -30,15 +32,17 @@ function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList:
             <S.Price>{data.price}원</S.Price>
           </div>
           <div>
-            <Button size={'small'}>예매하기</Button>
+            <Button size={'small'} onClick={() => navigator(`/reserve/${data.id}`)}>
+              예매하기
+            </Button>
           </div>
         </S.MainLeft>
         <S.MainRight>
           <div>
             {IsLikeStar(String(data.id)) ? (
-              <FillStarIcon onClick={(e) => onClicFillStart(e, data.id)} />
+              <FillStarIcon size={'25'} onClick={(e) => onClicFillStart(e, data.id)} />
             ) : (
-              <NotFillStarIcon onClick={(e) => onClickNotFillStart(e, data.id)} />
+              <NotFillStarIcon size={'25'} onClick={(e) => onClickNotFillStart(e, data.id)} />
             )}
           </div>
           <S.Date>{data.date.started}</S.Date>
@@ -50,7 +54,6 @@ function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList:
 export default LikeItemBox;
 
 const Wrapper = styled.div`
-  cursor: pointer;
   ${FlexAlignCSS}
   border-radius: 10px 0 0 10px;
   margin-bottom: 0.8rem;
