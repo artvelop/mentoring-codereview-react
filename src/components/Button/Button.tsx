@@ -5,7 +5,7 @@ type OnClickType = (event: React.MouseEvent<HTMLButtonElement>) => void;
 interface ButtonProps {
   variant?: 'default-black' | 'orange' | 'gray';
   size?: 'small' | 'default';
-  fontSize?: 'default';
+  fontSize?: 'default' | 'big';
   type?: 'submit' | 'button';
   disabled?: boolean;
   children?: React.ReactNode;

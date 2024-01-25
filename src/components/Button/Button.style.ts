@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 type Props = {
   variant: 'default-black' | 'orange' | 'gray';
   size: 'small' | 'default';
-  fontSize: 'default';
+  fontSize: 'default' | 'big';
   // disabled: boolean
 };
 
@@ -33,6 +33,9 @@ const sizeCSS = {
 const fontSizeCSS = {
   default: css`
     font-size: 8px;
+  `,
+  big: css`
+    font-size: 25px;
   `,
 };
 
