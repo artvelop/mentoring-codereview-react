@@ -1,18 +1,38 @@
 import Button from '@components/Button/Button';
 import LoadingPage from '@components/Spinner/Spinner';
 import useGetDetailExhibitionData from '@hooks/Queries/get-DetailExhibition';
-import { BackIcon, NotFillStarIcon } from '@src/Icons/Icons';
+import { BackIcon, FillStarIcon, NotFillStarIcon } from '@src/Icons/Icons';
 import { FlexAlignCSS } from '@src/Styles/common';
 import { WidthAutoCSS } from '@src/Styles/common';
+import StarService from '@utils/StarService';
+import { IsLikeStar } from '@utils/isLikeStar';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 function Reserve() {
   const navigate = useNavigate();
   const params = useParams();
-  console.log(params.id);
+  const [likeStarId, setLikeStarId] = useState<undefined | string>(undefined);
+
   const { data, isLoading } = useGetDetailExhibitionData(Number(params.id));
-  console.log(data);
+
+  const onClickNotFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
+    event.stopPropagation();
+    StarService.setStar(String(id));
+    setLikeStarId(StarService.getStar());
+  };
+  const onClicFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
+    event.stopPropagation();
+    StarService.removeStar(String(id));
+    setLikeStarId(StarService.getStar());
+  };
+
+  useEffect(() => {
+    if (data) {
+      setLikeStarId(IsLikeStar(String(data.id)));
+    }
+  }, []);
   return (
     <S.Wrapper>
       <S.Head>
@@ -25,7 +45,7 @@ function Reserve() {
         <LoadingPage />
       ) : (
         <S.Container>
-          <img src={data.imageUrl} alt="" />
+          <img src={data.imageUrl} alt="imgUrl" />
           <S.Title>{data.title}</S.Title>
           <S.Price>{data.price}원</S.Price>
           <S.Dec>
@@ -34,10 +54,16 @@ function Reserve() {
               <div>{data.date.started}</div>
             </S.DecLeft>
             <div>
-              <NotFillStarIcon size={'35'} />
+              {IsLikeStar(String(data.id)) ? (
+                <FillStarIcon size={'35'} onClick={(e) => onClicFillStart(e, data.id)} />
+              ) : (
+                <NotFillStarIcon size={'35'} onClick={(e) => onClickNotFillStart(e, data.id)} />
+              )}
             </div>
           </S.Dec>
-          <Button variant="orange">예매하기</Button>
+          <S.ButtonStyle variant="orange" fontSize="big">
+            예매하기
+          </S.ButtonStyle>
         </S.Container>
       )}
     </S.Wrapper>
@@ -80,5 +106,8 @@ const Dec = styled.div`
   font-weight: 600;
 `;
 const DecLeft = styled.div``;
-
-const S = { Wrapper, Head, Container, Title, Price, Dec, DecLeft };
+const ButtonStyle = styled(Button)`
+  width: 90%;
+  margin: 1.5rem;
+`;
+const S = { Wrapper, Head, Container, Title, Price, Dec, DecLeft, ButtonStyle };
