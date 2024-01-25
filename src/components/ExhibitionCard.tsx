@@ -47,7 +47,11 @@ const ExhibitionCard = ({
 
       <section className="ml-auto min-w-10 flex flex-col justify-between">
         <button className="flex justify-end" onClick={togglePickCard}>
-          {isPickedCard ? <FilledStarIcon /> : <EmptyStarIcon />}
+          {isPickedCard ? (
+            <FilledStarIcon className="w-4 h-4" />
+          ) : (
+            <EmptyStarIcon className="w-4 h-4" />
+          )}
         </button>
         <Link
           to={`/book/${id}`}

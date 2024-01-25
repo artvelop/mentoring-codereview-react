@@ -29,7 +29,7 @@ const RouterWithTabBar: React.FC<RouterWithTabBarProps> = ({ children }) => {
             pathname !== '/picked' && 'text-gray-400'
           }`}
         >
-          <FilledStarIcon />
+          <FilledStarIcon className="w-4" />
           찜목록
         </Link>
       </div>
