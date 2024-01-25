@@ -18,27 +18,34 @@ const ExhibitionDetail = ({
     date: { started, ended },
   },
 }: ExhibitionDetailProps) => {
-  const { pickedExhibitionIDs } = usePickedExhibitionStore();
-
+  const { addExhibition, deleteExhibition, pickedExhibitionIDs } = usePickedExhibitionStore();
   const isPickedCard = pickedExhibitionIDs.includes(id);
+
+  const togglePickCard = () => {
+    if (isPickedCard) {
+      deleteExhibition(id);
+      return;
+    }
+    addExhibition(id);
+  };
   return (
     <div>
       <img src={imageUrl} alt="Exhibition" />
-      <section className="flex flex-col p-2">
+      <section className="flex flex-col p-3">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <div className="text-lg font-semibold text-orange-600 py-1">{price}원</div>
-        <div className="flex justify-between items-end py-2">
-          <div>
+        <div className="text-xl font-semibold text-orange-600 py-1">{price}원</div>
+        <div className="flex justify-between items-end py-3">
+          <div className="font-semibold">
             <div>{place}</div>
             <div>
               {started} ~ {ended}
             </div>
           </div>
-          <div>
+          <div onClick={togglePickCard}>
             {isPickedCard ? <FilledStarIcon className="w-8" /> : <EmptyStarIcon className="w-7" />}
           </div>
         </div>
-        <button className="p-3 bg-[#FFBF66] rounded-md text-xl text-white font-bold">
+        <button className="p-3 bg-[#FFBF66] rounded-md text-2xl text-white font-bold">
           예매하기
         </button>
       </section>
