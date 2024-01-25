@@ -5,10 +5,12 @@ import { FlexAlignCSS, FlexColumnCSS } from '@src/Styles/common';
 import StarService from '@utils/StarService';
 import { IsLikeStar } from '@utils/isLikeStar';
 import { MouseEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ItemBox({ data }: { data: ExhibitionType }) {
   const [likeStarId, setLikeStarId] = useState<undefined | string>(undefined);
+  const navigator = useNavigate();
 
   const onClickNotFillStart = (event: MouseEvent<HTMLOrSVGElement>, id: number) => {
     event.stopPropagation();
@@ -42,12 +44,14 @@ function ItemBox({ data }: { data: ExhibitionType }) {
         <S.MainRight>
           <div>
             {IsLikeStar(String(data.id)) ? (
-              <FillStarIcon onClick={(e) => onClicFillStart(e, data.id)} />
+              <FillStarIcon size={'25'} onClick={(e) => onClicFillStart(e, data.id)} />
             ) : (
-              <NotFillStarIcon onClick={(e) => onClickNotFillStart(e, data.id)} />
+              <NotFillStarIcon size={'25'} onClick={(e) => onClickNotFillStart(e, data.id)} />
             )}
           </div>
-          <Button size={'small'}>예매하기</Button>
+          <Button size={'small'} onClick={() => navigator(`/reserve/${data.id}`)}>
+            예매하기
+          </Button>
         </S.MainRight>
       </S.Main>
     </S.Wrapper>
@@ -56,7 +60,6 @@ function ItemBox({ data }: { data: ExhibitionType }) {
 export default ItemBox;
 
 const Wrapper = styled.div`
-  cursor: pointer;
   ${FlexAlignCSS}
   border-radius: 10px 0 0 10px;
   margin-bottom: 0.8rem;
