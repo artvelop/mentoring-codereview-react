@@ -6,7 +6,7 @@ interface OnClickIconType {
   size?: string;
   onClick?: React.MouseEventHandler<SVGSVGElement>;
 }
-
+//
 export const NotFillStarIcon = ({ size, onClick }: OnClickIconType) => (
   <FaRegStar size={size} onClick={onClick} color="#FB9B00" />
 ); // 별빈거
