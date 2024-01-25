@@ -2,6 +2,7 @@ import BottomNavigationFooter from '@components/layout/bottomNavigationFooter';
 import { Home } from '@pages/Home';
 
 import Error404 from './Error/error404';
+import Reserve from '@pages/Reserve';
 
 const router = [
   {
@@ -17,6 +18,10 @@ const router = [
         element: <Home />,
       },
     ],
+  },
+  {
+    path: '/reserve/:id',
+    element: <Reserve />,
   },
   {
     path: '/*',
