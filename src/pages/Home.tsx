@@ -1,6 +1,6 @@
 import ItemBox from '@components/ItemBox';
 import { FlexCenterCSS, WidthAutoCSS } from '@src/Styles/common';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import useGetExhibitionListData from '@hooks/Queries/get-ExhibitionList';
@@ -13,10 +13,12 @@ export const Home = () => {
   const { data, isLoading } = useGetExhibitionListData();
   const [likeList, setLikeList] = useState(StarService.getStar() || []);
   const location = useLocation();
-  console.log(location.pathname);
 
   //data를 filter로 처리
   //그걸 itembox에 줄수있다.
+  useEffect(() => {
+    setLikeList(StarService.getStar() || []);
+  }, [location]);
 
   return (
     <div>
@@ -32,16 +34,25 @@ export const Home = () => {
                 </>
               ) : (
                 <>
-                  {data!.map((list, idx: number) => (
+                  {likeList.length === 0 ? (
+                    <S.NotList>
+                      찜해놓은 전시회가 없습니다
+                      <div>맘에 드는 전시회가 있다면 찜해보세요</div>
+                    </S.NotList>
+                  ) : (
                     <>
-                      {likeList.map(
-                        (likeId: string, idx: number) =>
-                          Number(likeId) === list.id && (
-                            <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
-                          ),
-                      )}
+                      {data!.map((list, idx: number) => (
+                        <>
+                          {likeList.map(
+                            (likeId: string, idx: number) =>
+                              Number(likeId) === list.id && (
+                                <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
+                              ),
+                          )}
+                        </>
+                      ))}
                     </>
-                  ))}
+                  )}
                 </>
               )}
             </>
@@ -71,4 +82,15 @@ const FooterDiv = styled.div`
   ${FlexCenterCSS}
   flex-direction: column;
 `;
-const S = { Wrapper, Footer, FooterDiv };
+const NotList = styled.div`
+  ${FlexCenterCSS}
+  flex-direction: column;
+  height: 70dvh;
+  font-size: 20px;
+  font-weight: 600;
+  & > div {
+    color: gray;
+    margin-top: 1rem;
+  }
+`;
+const S = { Wrapper, Footer, FooterDiv, NotList };
