@@ -49,7 +49,7 @@ const ExhibitionDetail = ({
             </div>
           </div>
           <div onClick={togglePickCard}>
-            {isPickedCard ? <FilledStarIcon className="w-8" /> : <EmptyStarIcon className="w-7" />}
+            {isPickedCard ? <FilledStarIcon className="w-7" /> : <EmptyStarIcon className="w-7" />}
           </div>
         </div>
         <button
