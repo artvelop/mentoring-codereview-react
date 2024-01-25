@@ -9,7 +9,7 @@ const getDetailExhibitionData = async (id: number) => {
 };
 
 const useGetDetailExhibitionData = (id: number) => {
-  const { data, isLoading, refetch } = useQuery<ExhibitionType | any>(
+  const { data, isLoading, refetch } = useQuery<ExhibitionType | any, boolean>(
     ['useGetDetailExhibitionData'],
     () => getDetailExhibitionData(id),
   );
