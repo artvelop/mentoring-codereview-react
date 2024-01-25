@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Exhibition } from '@src/lib/types/exhibition';
 import { ReactComponent as FilledStarIcon } from '@assets/icons/FilledStar.svg';
 import { ReactComponent as EmptyStarIcon } from '@assets/icons/EmptyStar.svg';
 import { usePickedExhibitionStore } from '@src/store';
+import { BookingModal } from './BookingModal';
 
 interface ExhibitionDetailProps {
   exhibition: Exhibition;
@@ -18,6 +19,7 @@ const ExhibitionDetail = ({
     date: { started, ended },
   },
 }: ExhibitionDetailProps) => {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const { addExhibition, deleteExhibition, pickedExhibitionIDs } = usePickedExhibitionStore();
   const isPickedCard = pickedExhibitionIDs.includes(id);
 
@@ -28,6 +30,11 @@ const ExhibitionDetail = ({
     }
     addExhibition(id);
   };
+
+  const 예매버튼클릭 = () => {
+    setIsBookingModalOpen(true);
+  };
+
   return (
     <div>
       <img src={imageUrl} alt="Exhibition" />
@@ -45,10 +52,17 @@ const ExhibitionDetail = ({
             {isPickedCard ? <FilledStarIcon className="w-8" /> : <EmptyStarIcon className="w-7" />}
           </div>
         </div>
-        <button className="p-3 bg-[#FFBF66] rounded-md text-2xl text-white font-bold">
+        <button
+          onClick={예매버튼클릭}
+          className="p-3 bg-[#FFBF66] rounded-md text-2xl text-white font-bold"
+        >
           예매하기
         </button>
       </section>
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onRequestClose={() => setIsBookingModalOpen(false)}
+      />
     </div>
   );
 };
