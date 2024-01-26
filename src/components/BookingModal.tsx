@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ModalBase, ModalProps } from './ModalBase';
+import { Link } from 'react-router-dom';
 
 export const BookingModal: React.FC<Omit<ModalProps, 'children'>> = ({
   isOpen,
@@ -8,8 +9,8 @@ export const BookingModal: React.FC<Omit<ModalProps, 'children'>> = ({
 }) => {
   const [isBooked, setIsBooked] = useState(false);
 
-  const 확인버튼클릭 = () => {
-    // 1. 이메일 전송
+  const handleBookingConfirmation = async () => {
+    // TODO: 이메일 전송 로직 구현
     setIsBooked(true);
   };
 
@@ -26,14 +27,15 @@ export const BookingModal: React.FC<Omit<ModalProps, 'children'>> = ({
             </>
           )}
         </section>
-        <section className="flex flex-col gap-2 text-white">
+
+        <section className="flex flex-col gap-2 text-white text-center">
           {isBooked ? (
-            <button className="p-1 bg-[#FFBF66] rounded-md" onClick={onRequestClose}>
+            <Link to="/" className="p-1 bg-[#FFBF66] rounded-md">
               확인
-            </button>
+            </Link>
           ) : (
             <>
-              <button className="p-1 bg-[#FFBF66] rounded-md" onClick={확인버튼클릭}>
+              <button className="p-1 bg-[#FFBF66] rounded-md" onClick={handleBookingConfirmation}>
                 확인
               </button>
               <button className="p-1 bg-gray-300 rounded-md" onClick={onRequestClose}>
