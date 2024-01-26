@@ -11,7 +11,7 @@ export const Home = () => {
 
   return (
     <div>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <div className="h-[100dvh] flex justify-center items-center">Loading...</div>}
       {exhibitionList &&
         exhibitionList.map((exhibition) => (
           <ExhibitionCard key={exhibition.id} exhibition={exhibition} />
