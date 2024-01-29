@@ -1,4 +1,5 @@
 import Button from '@components/Button/Button';
+import Modal from '@components/Modal/modal';
 import LoadingPage from '@components/Spinner/Spinner';
 import useGetDetailExhibitionData from '@hooks/Queries/get-DetailExhibition';
 import { BackIcon, FillStarIcon, NotFillStarIcon } from '@src/Icons/Icons';
@@ -14,6 +15,7 @@ function Reserve() {
   const navigate = useNavigate();
   const params = useParams();
   const [likeStarId, setLikeStarId] = useState<undefined | string>(undefined);
+  const [isModalView, setIsModalView] = useState<boolean>(false);
 
   const { data, isLoading } = useGetDetailExhibitionData(Number(params.id));
 
@@ -61,10 +63,23 @@ function Reserve() {
               )}
             </div>
           </S.Dec>
-          <S.ButtonStyle variant="orange" fontSize="big">
+          <S.ButtonStyle variant="orange" fontSize="big" onClick={() => setIsModalView(true)}>
             예매하기
           </S.ButtonStyle>
         </S.Container>
+      )}
+      {isModalView && (
+        <Modal>
+          <div>티켓 예매하시겠습니까?</div>
+          <div>예약 내역은 이메일로 전송됩니다</div>
+
+          <S.ButtonStyleModal variant="orange" fontSize="big" onClick={() => navigate('/')}>
+            확인
+          </S.ButtonStyleModal>
+          <S.ButtonStyleModal variant="gray" fontSize="big" onClick={() => setIsModalView(false)}>
+            취소
+          </S.ButtonStyleModal>
+        </Modal>
       )}
     </S.Wrapper>
   );
@@ -110,4 +125,9 @@ const ButtonStyle = styled(Button)`
   width: 90%;
   margin: 1.5rem;
 `;
-const S = { Wrapper, Head, Container, Title, Price, Dec, DecLeft, ButtonStyle };
+const ButtonStyleModal = styled(Button)`
+  width: 90%;
+  height: 2rem;
+  margin: 0.2rem;
+`;
+const S = { Wrapper, Head, Container, Title, Price, Dec, DecLeft, ButtonStyle, ButtonStyleModal };

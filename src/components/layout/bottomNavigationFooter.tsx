@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 function BottomNavigationFooter() {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
+
   return (
     <>
       <Outlet />
