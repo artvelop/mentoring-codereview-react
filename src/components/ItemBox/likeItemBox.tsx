@@ -4,6 +4,7 @@ import { FillStarIcon, NotFillStarIcon } from '@src/Icons/Icons';
 import { FlexAlignCSS, FlexColumnCSS } from '@src/Styles/common';
 import StarService from '@utils/StarService';
 import { IsLikeStar } from '@utils/isLikeStar';
+import { PriceWithComma } from '@utils/priceWithComma';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -29,7 +30,7 @@ function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList:
           <div>
             <S.Title>{data.title}</S.Title>
             <S.Dec>{data.place}</S.Dec>
-            <S.Price>{data.price}원</S.Price>
+            <S.Price>{PriceWithComma(data.price)}원</S.Price>
           </div>
           <div>
             <Button size={'small'} onClick={() => navigator(`/reserve/${data.id}`)}>

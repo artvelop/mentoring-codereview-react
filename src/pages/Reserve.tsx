@@ -7,6 +7,7 @@ import { FlexAlignCSS } from '@src/Styles/common';
 import { WidthAutoCSS } from '@src/Styles/common';
 import StarService from '@utils/StarService';
 import { IsLikeStar } from '@utils/isLikeStar';
+import { PriceWithComma } from '@utils/priceWithComma';
 import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -35,6 +36,7 @@ function Reserve() {
       setLikeStarId(IsLikeStar(String(data.id)));
     }
   }, []);
+
   return (
     <S.Wrapper>
       <S.Head>
@@ -44,12 +46,14 @@ function Reserve() {
         <h3>예매하기</h3>
       </S.Head>
       {isLoading ? (
-        <LoadingPage />
+        <S.LoadingWrapper>
+          <LoadingPage />
+        </S.LoadingWrapper>
       ) : (
         <S.Container>
           <img src={data.imageUrl} alt="imgUrl" />
           <S.Title>{data.title}</S.Title>
-          <S.Price>{data.price}원</S.Price>
+          <S.Price>{PriceWithComma(data.price)}원</S.Price>
           <S.Dec>
             <S.DecLeft>
               <div>{data.place}</div>
@@ -130,4 +134,23 @@ const ButtonStyleModal = styled(Button)`
   height: 2rem;
   margin: 0.2rem;
 `;
-const S = { Wrapper, Head, Container, Title, Price, Dec, DecLeft, ButtonStyle, ButtonStyleModal };
+const LoadingWrapper = styled.div`
+  background-color: red;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const S = {
+  Wrapper,
+  Head,
+  Container,
+  Title,
+  Price,
+  Dec,
+  DecLeft,
+  ButtonStyle,
+  ButtonStyleModal,
+  LoadingWrapper,
+};
