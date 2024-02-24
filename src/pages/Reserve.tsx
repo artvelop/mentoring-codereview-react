@@ -46,9 +46,7 @@ function Reserve() {
         <h3>예매하기</h3>
       </S.Head>
       {isLoading ? (
-        <S.LoadingWrapper>
-          <LoadingPage />
-        </S.LoadingWrapper>
+        <LoadingPage />
       ) : (
         <S.Container>
           <img src={data.imageUrl} alt="imgUrl" />
@@ -134,14 +132,7 @@ const ButtonStyleModal = styled(Button)`
   height: 2rem;
   margin: 0.2rem;
 `;
-const LoadingWrapper = styled.div`
-  background-color: red;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+
 const S = {
   Wrapper,
   Head,
@@ -152,5 +143,4 @@ const S = {
   DecLeft,
   ButtonStyle,
   ButtonStyleModal,
-  LoadingWrapper,
 };
