@@ -37,6 +37,8 @@ function Reserve() {
     }
   }, []);
 
+  if (isLoading) return <LoadingPage />;
+
   return (
     <S.Wrapper>
       <S.Head>
@@ -45,31 +47,29 @@ function Reserve() {
         </div>
         <h3>예매하기</h3>
       </S.Head>
-      {isLoading ? (
-        <LoadingPage />
-      ) : (
-        <S.Container>
-          <img src={data.imageUrl} alt="imgUrl" />
-          <S.Title>{data.title}</S.Title>
-          <S.Price>{PriceWithComma(data.price)}원</S.Price>
-          <S.Dec>
-            <S.DecLeft>
-              <div>{data.place}</div>
-              <div>{data.date.started}</div>
-            </S.DecLeft>
-            <div>
-              {IsLikeStar(String(data.id)) ? (
-                <FillStarIcon size={'35'} onClick={(e) => onClicFillStart(e, data.id)} />
-              ) : (
-                <NotFillStarIcon size={'35'} onClick={(e) => onClickNotFillStart(e, data.id)} />
-              )}
-            </div>
-          </S.Dec>
-          <S.ButtonStyle variant="orange" fontSize="big" onClick={() => setIsModalView(true)}>
-            예매하기
-          </S.ButtonStyle>
-        </S.Container>
-      )}
+
+      <S.Container>
+        <img src={data.imageUrl} alt="imgUrl" />
+        <S.Title>{data.title}</S.Title>
+        <S.Price>{PriceWithComma(data.price)}원</S.Price>
+        <S.Dec>
+          <S.DecLeft>
+            <div>{data.place}</div>
+            <div>{data.date.started}</div>
+          </S.DecLeft>
+          <div>
+            {IsLikeStar(String(data.id)) ? (
+              <FillStarIcon size={'35'} onClick={(e) => onClicFillStart(e, data.id)} />
+            ) : (
+              <NotFillStarIcon size={'35'} onClick={(e) => onClickNotFillStart(e, data.id)} />
+            )}
+          </div>
+        </S.Dec>
+        <S.ButtonStyle variant="orange" fontSize="big" onClick={() => setIsModalView(true)}>
+          예매하기
+        </S.ButtonStyle>
+      </S.Container>
+
       {isModalView && (
         <Modal>
           <div>티켓 예매하시겠습니까?</div>

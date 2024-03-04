@@ -13,53 +13,46 @@ export const Home = () => {
   const { data, isLoading } = useGetExhibitionListData();
   const [likeList, setLikeList] = useState(StarService.getStar() || []);
   const location = useLocation();
-
+  //
   //data를 filter로 처리
   //그걸 itembox에 줄수있다.
   useEffect(() => {
     setLikeList(StarService.getStar() || []);
   }, [location]);
 
+  if (isLoading) return <LoadingPage />;
   return (
     <div>
       <S.Wrapper>
-        <>
-          {!isLoading ? (
-            <>
-              {location.pathname === '/' ? (
-                <>
-                  {data!.map((list, key) => (
-                    <ItemBox key={list.id} data={list} />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {likeList.length === 0 ? (
-                    <S.NotList>
-                      찜해놓은 전시회가 없습니다
-                      <div>맘에 드는 전시회가 있다면 찜해보세요</div>
-                    </S.NotList>
-                  ) : (
-                    <>
-                      {data!.map((list, idx: number) => (
-                        <>
-                          {likeList.map(
-                            (likeId: string, idx: number) =>
-                              Number(likeId) === list.id && (
-                                <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
-                              ),
-                          )}
-                        </>
-                      ))}
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          ) : (
-            <LoadingPage />
-          )}
-        </>
+        {location.pathname === '/' ? (
+          <>
+            {data!.map((list, key) => (
+              <ItemBox key={list.id} data={list} />
+            ))}
+          </>
+        ) : (
+          <>
+            {likeList.length === 0 ? (
+              <S.NotList>
+                찜해놓은 전시회가 없습니다
+                <div>맘에 드는 전시회가 있다면 찜해보세요</div>
+              </S.NotList>
+            ) : (
+              <>
+                {data!.map((list, idx: number) => (
+                  <>
+                    {likeList.map(
+                      (likeId: string, idx: number) =>
+                        Number(likeId) === list.id && (
+                          <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
+                        ),
+                    )}
+                  </>
+                ))}
+              </>
+            )}
+          </>
+        )}
       </S.Wrapper>
     </div>
   );
