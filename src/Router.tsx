@@ -3,6 +3,7 @@ import { Home } from '@pages/Home';
 
 import Error404 from './Error/error404';
 import Reserve from '@pages/Reserve';
+import { Like } from '@pages/Like';
 
 const router = [
   {
@@ -15,7 +16,7 @@ const router = [
       },
       {
         path: '/like',
-        element: <Home />,
+        element: <Like />,
       },
     ],
   },
