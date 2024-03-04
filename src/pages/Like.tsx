@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import LikeItemBox from '@components/ItemBox/likeItemBox';
 import StarService from '@utils/StarService';
 
-export const Home = () => {
+export const Like = () => {
   const { data, isLoading } = useGetExhibitionListData();
   const [likeList, setLikeList] = useState(StarService.getStar() || []);
   const location = useLocation();
@@ -21,22 +21,27 @@ export const Home = () => {
   }, [location]);
 
   if (isLoading) return <LoadingPage />;
-  if (data?.length === 0)
+  if (likeList.length === 0)
     return (
       <S.NotList>
-        지금 하고있는 전시회가 없습니다.
-        <div>전시회가 열리면 알려드릴게요</div>
+        찜해놓은 전시회가 없습니다
+        <div>맘에 드는 전시회가 있다면 찜해보세요</div>
       </S.NotList>
     );
 
   return (
     <div>
       <S.Wrapper>
-        <>
-          {data?.map((list, key) => (
-            <ItemBox key={list.id} data={list} />
-          ))}
-        </>
+        {data!.map((list, idx: number) => (
+          <>
+            {likeList.map(
+              (likeId: string, idx: number) =>
+                Number(likeId) === list.id && (
+                  <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
+                ),
+            )}
+          </>
+        ))}
       </S.Wrapper>
     </div>
   );
