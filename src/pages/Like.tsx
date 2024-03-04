@@ -1,24 +1,15 @@
-import ItemBox from '@components/ItemBox';
 import { FlexCenterCSS, WidthAutoCSS } from '@src/Styles/common';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import useGetExhibitionListData from '@hooks/Queries/get-ExhibitionList';
 import LoadingPage from '@components/Spinner/Spinner';
-import { useLocation } from 'react-router-dom';
 import LikeItemBox from '@components/ItemBox/likeItemBox';
 import StarService from '@utils/StarService';
 
 export const Like = () => {
   const { data, isLoading } = useGetExhibitionListData();
   const [likeList, setLikeList] = useState(StarService.getStar() || []);
-  const location = useLocation();
-  //
-  //data를 filter로 처리
-  //그걸 itembox에 줄수있다.
-  useEffect(() => {
-    setLikeList(StarService.getStar() || []);
-  }, [location]);
 
   if (isLoading) return <LoadingPage />;
   if (likeList.length === 0)
@@ -32,16 +23,17 @@ export const Like = () => {
   return (
     <div>
       <S.Wrapper>
-        {data!.map((list, idx: number) => (
-          <>
-            {likeList.map(
-              (likeId: string, idx: number) =>
-                Number(likeId) === list.id && (
-                  <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
-                ),
-            )}
-          </>
-        ))}
+        {data?.length !== 0 &&
+          data?.map((list, idx: number) => (
+            <>
+              {likeList.map(
+                (likeId: string, idx: number) =>
+                  Number(likeId) === list.id && (
+                    <LikeItemBox key={list.id} data={list} setLikeList={setLikeList} />
+                  ),
+              )}
+            </>
+          ))}
       </S.Wrapper>
     </div>
   );
