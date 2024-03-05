@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 function LoadingPage() {
   return (
-    <S.Wrapper>
-      <S.LoadingText>로딩중</S.LoadingText>
-      <S.Loading></S.Loading>
-    </S.Wrapper>
+    <Wrapper>
+      <LoadingText>로딩중</LoadingText>
+      <Loading></Loading>
+    </Wrapper>
   );
 }
 export default LoadingPage;
@@ -45,4 +45,3 @@ const Loading = styled.div`
     }
   }
 `;
-const S = { Wrapper, Loading, LoadingText };

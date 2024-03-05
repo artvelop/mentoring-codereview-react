@@ -29,20 +29,20 @@ function ItemBox({ data }: { data: ExhibitionType }) {
   }, []);
 
   return (
-    <S.Wrapper>
+    <Wrapper>
       <Img src={data.imageUrl} alt="Img" />
-      <S.Main>
-        <S.MainLeft>
+      <Main>
+        <MainLeft>
           <div>
-            <S.Title>{data.title}</S.Title>
-            <S.Dec>{data.place}</S.Dec>
-            <S.Price>{PriceWithComma(data.price)}원</S.Price>
+            <Title>{data.title}</Title>
+            <Dec>{data.place}</Dec>
+            <Price>{PriceWithComma(data.price)}원</Price>
           </div>
           <div>
-            <S.Date>{data.date.started}</S.Date>
+            <Date>{data.date.started}</Date>
           </div>
-        </S.MainLeft>
-        <S.MainRight>
+        </MainLeft>
+        <MainRight>
           <div>
             {IsLikeStar(String(data.id)) ? (
               <FillStarIcon size={'25'} onClick={(e) => onClicFillStart(e, data.id)} />
@@ -53,9 +53,9 @@ function ItemBox({ data }: { data: ExhibitionType }) {
           <Button size={'small'} onClick={() => navigator(`/reserve/${data.id}`)}>
             예매하기
           </Button>
-        </S.MainRight>
-      </S.Main>
-    </S.Wrapper>
+        </MainRight>
+      </Main>
+    </Wrapper>
   );
 }
 export default ItemBox;
@@ -107,5 +107,3 @@ const Date = styled.div`
   color: gray;
   font-size: 11px;
 `;
-
-const S = { Wrapper, Img, Main, MainRight, MainLeft, Title, Dec, Price, Date };

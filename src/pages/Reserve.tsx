@@ -40,23 +40,23 @@ function Reserve() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <S.Wrapper>
-      <S.Head>
+    <Wrapper>
+      <Head>
         <div onClick={() => navigate('/')}>
           <BackIcon />
         </div>
         <h3>예매하기</h3>
-      </S.Head>
+      </Head>
 
-      <S.Container>
+      <Container>
         <img src={data.imageUrl} alt="imgUrl" />
-        <S.Title>{data.title}</S.Title>
-        <S.Price>{PriceWithComma(data.price)}원</S.Price>
-        <S.Dec>
-          <S.DecLeft>
+        <Title>{data.title}</Title>
+        <Price>{PriceWithComma(data.price)}원</Price>
+        <Dec>
+          <DecLeft>
             <div>{data.place}</div>
             <div>{data.date.started}</div>
-          </S.DecLeft>
+          </DecLeft>
           <div>
             {IsLikeStar(String(data.id)) ? (
               <FillStarIcon size={'35'} onClick={(e) => onClicFillStart(e, data.id)} />
@@ -64,26 +64,26 @@ function Reserve() {
               <NotFillStarIcon size={'35'} onClick={(e) => onClickNotFillStart(e, data.id)} />
             )}
           </div>
-        </S.Dec>
-        <S.ButtonStyle variant="orange" fontSize="big" onClick={() => setIsModalView(true)}>
+        </Dec>
+        <ButtonStyle variant="orange" fontSize="big" onClick={() => setIsModalView(true)}>
           예매하기
-        </S.ButtonStyle>
-      </S.Container>
+        </ButtonStyle>
+      </Container>
 
       {isModalView && (
         <Modal>
           <div>티켓 예매하시겠습니까?</div>
           <div>예약 내역은 이메일로 전송됩니다</div>
 
-          <S.ButtonStyleModal variant="orange" fontSize="big" onClick={() => navigate('/')}>
+          <ButtonStyleModal variant="orange" fontSize="big" onClick={() => navigate('/')}>
             확인
-          </S.ButtonStyleModal>
-          <S.ButtonStyleModal variant="gray" fontSize="big" onClick={() => setIsModalView(false)}>
+          </ButtonStyleModal>
+          <ButtonStyleModal variant="gray" fontSize="big" onClick={() => setIsModalView(false)}>
             취소
-          </S.ButtonStyleModal>
+          </ButtonStyleModal>
         </Modal>
       )}
-    </S.Wrapper>
+    </Wrapper>
   );
 }
 export default Reserve;
@@ -132,15 +132,3 @@ const ButtonStyleModal = styled(Button)`
   height: 2rem;
   margin: 0.2rem;
 `;
-
-const S = {
-  Wrapper,
-  Head,
-  Container,
-  Title,
-  Price,
-  Dec,
-  DecLeft,
-  ButtonStyle,
-  ButtonStyleModal,
-};

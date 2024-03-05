@@ -23,22 +23,22 @@ function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList:
   };
 
   return (
-    <S.Wrapper>
+    <Wrapper>
       <Img src={data.imageUrl} alt="Img" />
-      <S.Main>
-        <S.MainLeft>
+      <Main>
+        <MainLeft>
           <div>
-            <S.Title>{data.title}</S.Title>
-            <S.Dec>{data.place}</S.Dec>
-            <S.Price>{PriceWithComma(data.price)}원</S.Price>
+            <Title>{data.title}</Title>
+            <Dec>{data.place}</Dec>
+            <Price>{PriceWithComma(data.price)}원</Price>
           </div>
           <div>
             <Button size={'small'} onClick={() => navigator(`/reserve/${data.id}`)}>
               예매하기
             </Button>
           </div>
-        </S.MainLeft>
-        <S.MainRight>
+        </MainLeft>
+        <MainRight>
           <div>
             {IsLikeStar(String(data.id)) ? (
               <FillStarIcon size={'25'} onClick={(e) => onClicFillStart(e, data.id)} />
@@ -46,10 +46,10 @@ function LikeItemBox({ data, setLikeList }: { data: ExhibitionType; setLikeList:
               <NotFillStarIcon size={'25'} onClick={(e) => onClickNotFillStart(e, data.id)} />
             )}
           </div>
-          <S.Date>{data.date.started}</S.Date>
-        </S.MainRight>
-      </S.Main>
-    </S.Wrapper>
+          <Date>{data.date.started}</Date>
+        </MainRight>
+      </Main>
+    </Wrapper>
   );
 }
 export default LikeItemBox;
@@ -101,5 +101,3 @@ const Date = styled.div`
   color: gray;
   font-size: 11px;
 `;
-
-const S = { Wrapper, Img, Main, MainRight, MainLeft, Title, Dec, Price, Date };

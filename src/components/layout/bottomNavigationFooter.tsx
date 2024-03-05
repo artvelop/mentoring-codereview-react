@@ -10,16 +10,16 @@ function BottomNavigationFooter() {
   return (
     <>
       <Outlet />
-      <S.Footer>
-        <S.FooterDiv disabled={location.pathname === '/'} onClick={() => navigate('/')}>
+      <Footer>
+        <FooterDiv disabled={location.pathname === '/'} onClick={() => navigate('/')}>
           <div>전시회</div>
           <TicketIcon />
-        </S.FooterDiv>
-        <S.FooterDiv disabled={location.pathname === '/like'} onClick={() => navigate('/like')}>
+        </FooterDiv>
+        <FooterDiv disabled={location.pathname === '/like'} onClick={() => navigate('/like')}>
           <div>찜목록</div>
           <FillStarIcon />
-        </S.FooterDiv>
-      </S.Footer>
+        </FooterDiv>
+      </Footer>
     </>
   );
 }
@@ -40,5 +40,3 @@ const FooterDiv = styled.div<{ disabled: boolean }>`
   flex-direction: column;
   opacity: ${({ theme, disabled }) => (disabled ? '1.0' : '0.5')};
 `;
-
-const S = { Footer, FooterDiv };

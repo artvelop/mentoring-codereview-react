@@ -12,19 +12,19 @@ export const Home = () => {
   if (isLoading) return <LoadingPage />;
   if (data?.length === 0)
     return (
-      <S.NotList>
+      <NotList>
         지금 하고있는 전시회가 없습니다.
         <div>전시회가 열리면 알려드릴게요</div>
-      </S.NotList>
+      </NotList>
     );
 
   return (
     <div>
-      <S.Wrapper>
+      <Wrapper>
         {data?.map((list, key) => (
           <ItemBox key={list.id} data={list} />
         ))}
-      </S.Wrapper>
+      </Wrapper>
     </div>
   );
 };
@@ -46,4 +46,3 @@ const NotList = styled.div`
     margin-top: 1rem;
   }
 `;
-const S = { Wrapper, NotList };

@@ -14,15 +14,15 @@ export const Like = () => {
   if (isLoading) return <LoadingPage />;
   if (likeList.length === 0)
     return (
-      <S.NotList>
+      <NotList>
         찜해놓은 전시회가 없습니다
         <div>맘에 드는 전시회가 있다면 찜해보세요</div>
-      </S.NotList>
+      </NotList>
     );
 
   return (
     <div>
-      <S.Wrapper>
+      <Wrapper>
         {data?.length !== 0 &&
           data?.map((list, idx: number) => (
             <>
@@ -34,7 +34,7 @@ export const Like = () => {
               )}
             </>
           ))}
-      </S.Wrapper>
+      </Wrapper>
     </div>
   );
 };
@@ -67,4 +67,3 @@ const NotList = styled.div`
     margin-top: 1rem;
   }
 `;
-const S = { Wrapper, Footer, FooterDiv, NotList };

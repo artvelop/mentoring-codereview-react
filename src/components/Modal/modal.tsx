@@ -8,9 +8,9 @@ interface childrenType {
 function Modal(Props: childrenType) {
   const { children } = Props;
   return (
-    <S.Wrapper>
-      <S.Box>{children}</S.Box>
-    </S.Wrapper>
+    <Wrapper>
+      <Box>{children}</Box>
+    </Wrapper>
   );
 }
 export default Modal;
@@ -55,5 +55,3 @@ const Box = styled.div`
     margin-bottom: 1rem;
   }
 `;
-
-const S = { Wrapper, Box };

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 function Error404() {
   return (
-    <S.Wrapper>
+    <Wrapper>
       <h1>
         <span>404</span> Error Page
       </h1>
-    </S.Wrapper>
+    </Wrapper>
   );
 }
 export default Error404;
@@ -29,5 +29,3 @@ const Wrapper = styled.div`
     }
   }
 `;
-
-const S = { Wrapper };
